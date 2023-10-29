@@ -1,0 +1,11 @@
+version: '3.8'
+
+
+services:
+  app:
+    container_name: docker-react-netflix-gpt-c
+    image: docker-react-netflix-gpt-i
+    build: 
+      context: .
+    ports:
+      -8080:80
