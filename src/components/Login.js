@@ -1,10 +1,70 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Header from "./Header"
-
+import { checkValidate } from "../utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth} from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
  
 export const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const name = useRef(null);
+  const email = useRef(null); 
+  const password = useRef(null);
+  
+  const formHandlerEvent = () => { 
+      const isValid = checkValidate(email.current.value, password.current.value);
+        if (isValid) { 
+            setErrorMessage(isValid)
+    }
+    if (isValid) return;
+    if (!isLogin) {
+      // sign up form
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+            .then((userCredential) => {
+          // Signed up 
+              // const user = userCredential.user;
+              // navigate('/browse') 
+              
+              updateProfile(auth.currentUser, {
+                displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/31730550?v=4"
+              }).then((res) => {
+                // Profile updated!   
+                 const { uid,  email, displayName, photoURL } = auth.currentUser;
+    dispatch(addUser({ uid: uid, email: email, displayName:displayName, photoURL: photoURL}))
+                  navigate('/browse')
+              }).catch((error) => {
+                // An error occurred               
+                  setErrorMessage(error.message);
+              });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + '-' + errorMessage);
+        });
 
+    } else { 
+      //sign in form
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((userCredential) => {
+          // Signed in
+          // const user = userCredential.user;
+           navigate('/browse')
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + '-' + errorMessage);
+        });
+
+    }
+
+  }
   const handleForm = () => { 
     setIsLogin(!isLogin);
   }
@@ -19,22 +79,33 @@ export const Login = () => {
       mx-auto right-0 left-0
       "> */}
        
-        <form className="text-white w-2/6   absolute p-12 bg-black my-36
+      <form
+         onSubmit={(e)=>e.preventDefault()}
+        className="text-white w-2/6   absolute p-12 bg-black my-36
       mx-auto right-0 left-0 bg-opacity-80">
         <p className="text-white font-bold text-center">{isLogin ? 'Sign In' : 'Sign Up'}</p>
         
-        {!isLogin && (<input className="p-2 my-2 rounded bg-[#333] w-full" type="text" placeholder="Full Name" />)}
-          <input className="p-2 my-2 rounded bg-[#333] w-full" type="text" placeholder="Email or Phone number" />
-            <input className="p-2 my-2 rounded bg-[#333] w-full" type="password" placeholder="Password" />
-            <button className="font-bold text-center p-4 my-4 rounded-lg text-white bg-red-600 w-full"> {isLogin?'Sign In':'Sign Up'} </button>
-           <div>
+        {!isLogin && (<input
+          ref={name}  className="p-2 my-2 rounded bg-[#333] w-full" type="text" placeholder="Full Name" />)}
+        <input
+           ref={email}
+          className="p-2 my-2 rounded bg-[#333] w-full" type="text" placeholder="Email or Phone number" />
+        <input
+          ref={password}	
+          className="p-2 my-2 rounded bg-[#333] w-full" type="password" placeholder="Password" />
+        <button
+          
+          onClick={formHandlerEvent}
+          className="font-bold text-center p-4 my-4 rounded-lg text-white bg-red-600 w-full"> {isLogin ? 'Sign In' : 'Sign Up'} </button>
+        <p className="text-red-600">{ errorMessage}</p>
+        <div>
              <input type="checkbox" className="text-white" name="remember" />
-            <span className="text-white-200 text-sm   right-0">Remember me </span>
-              <a href="#" className="text-white text-sm mx-auto right-0 left-0">Need help? </a>
+            <span className="text-white-200 text-sm ">Remember me </span>
+              <a href="#" className="text-white text-sm m-10 "> Need help? </a>
           </div>
            <div>             
             <span className="text-white text-sm mx-auto right-0 left-0">{isLogin?' New to Netflix':' New to Netflix'}</span>
-            <a href="#" onClick={handleForm} className="text-white text-sm mx-auto right-0 left-0">{isLogin?'Sign In':'Sign up now'} </a>
+            <a href="#" onClick={handleForm} className="text-white text-sm m-10">{isLogin?'Sign up now':'Sign In'} </a>
             <p>This page is protected by Google reCAPTCHA to ensure you 're not a bot.<a href="#" className="text-bl"> Learn more.</a></p>
             </div>
           

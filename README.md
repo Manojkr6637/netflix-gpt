@@ -1,10 +1,29 @@
-# netflix GPT features
+# netflix GPT
 
+-create react app
+-configure Tailwind
+-Header
+Rounting of App
+Login Form
+Sign up Form
+Form Validation
+useRef
+firebase setup
+firebase deploy to production
+create sign up user account
+implement sign in user api
+Create redux store with userSlice
+implement sign out
+update user profile
+build
+================================================features==
 -Home page
 -header
 -Logo
 -Multi-linguagal
--login in
+-login in/Sign up
+
+- Redirect to browse page
 
 - Home Banner
   -Title
