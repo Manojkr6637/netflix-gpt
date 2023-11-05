@@ -27,6 +27,11 @@ planning data for MainContainer and secondary container
 fetch data for trainer video
 Embeded the youtube video and make it autoplay and mute
 Trailwind Classes to make Main Container look awsome
+buid secondary component
+build movie list
+build movie card
+TMBD image CDN URL
+BUild browse page
 
 ================================================features==
 -Home page

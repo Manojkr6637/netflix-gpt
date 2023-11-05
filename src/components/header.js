@@ -9,7 +9,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();	
   const user = useSelector((store)=>store.user);
-  console.log("useruser", user?.photoURL)
+  // console.log("useruser", user?.photoURL)
   const handleSignOut = () => {
     signOut(auth).then(() => {
       // Sign-out successful.
