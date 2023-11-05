@@ -2,14 +2,13 @@ import { useRef, useState } from "react"
 import Header from "./Header"
 import { checkValidate } from "../utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth} from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { auth} from "../utils/firebase"; 
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
- 
+import { photoURL} from "../utils/constant"
 export const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  
   const [isLogin, setIsLogin] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const name = useRef(null);
@@ -28,15 +27,15 @@ export const Login = () => {
             .then((userCredential) => {
           // Signed up 
               // const user = userCredential.user;
-              // navigate('/browse') 
+             
               
               updateProfile(auth.currentUser, {
-                displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/31730550?v=4"
+                displayName: name.current.value, photoURL: photoURL
               }).then((res) => {
                 // Profile updated!   
                  const { uid,  email, displayName, photoURL } = auth.currentUser;
     dispatch(addUser({ uid: uid, email: email, displayName:displayName, photoURL: photoURL}))
-                  navigate('/browse')
+                  
               }).catch((error) => {
                 // An error occurred               
                   setErrorMessage(error.message);
@@ -54,7 +53,7 @@ export const Login = () => {
         .then((userCredential) => {
           // Signed in
           // const user = userCredential.user;
-           navigate('/browse')
+          
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -105,7 +104,8 @@ export const Login = () => {
           </div>
            <div>             
             <span className="text-white text-sm mx-auto right-0 left-0">{isLogin?' New to Netflix':' New to Netflix'}</span>
-            <a href="#" onClick={handleForm} className="text-white text-sm m-10">{isLogin?'Sign up now':'Sign In'} </a>
+          <a href="#" onClick={handleForm}
+            className="text-white text-sm m-10">{isLogin ? 'Sign up now' : 'Sign In'} </a>
             <p>This page is protected by Google reCAPTCHA to ensure you 're not a bot.<a href="#" className="text-bl"> Learn more.</a></p>
             </div>
           

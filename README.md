@@ -1,5 +1,6 @@
 # netflix GPT
 
+https://netflixgpt-12a4e.web.app/
 -create react app
 -configure Tailwind
 -Header
@@ -15,7 +16,18 @@ implement sign in user api
 Create redux store with userSlice
 implement sign out
 update user profile
-build
+Bug fix:If user is not logged in then redirect to login page and if user is login then redirect to browse page
+Unsubscribe to the unAuthStateChanged callback
+Added hardcode url into constast file
+get data from TMBD now playing movies list API
+create movieSlice
+update store with movies data
+Custom hook for now playing
+planning data for MainContainer and secondary container
+fetch data for trainer video
+Embeded the youtube video and make it autoplay and mute
+Trailwind Classes to make Main Container look awsome
+
 ================================================features==
 -Home page
 -header
