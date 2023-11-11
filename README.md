@@ -31,7 +31,12 @@ buid secondary component
 build movie list
 build movie card
 TMBD image CDN URL
-BUild browse page
+BUild browse page with tailwind CSS
+usePopularMovies Custom hook
+GPT Search Page
+GPT search Bar
+Multi-language feature in our app(Bunus)
+
 
 ================================================features==
 -Home page

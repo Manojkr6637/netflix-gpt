@@ -13,3 +13,9 @@ export const API_PLAYNOW = 'https://api.themoviedb.org/3/movie/now_playing?page=
 export const API_POPULAR = 'https://api.themoviedb.org/3/person/popular?page=1'
 
 export const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w780'
+
+export const SUPPORTED_LANGUAGES = [
+   {indentifier:'en', name:'English'},
+   {indentifier:'hi', name:'Hindi'},
+   {indentifier:'sp', name:'Spanish'},
+]
