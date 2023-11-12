@@ -36,7 +36,9 @@ usePopularMovies Custom hook
 GPT Search Page
 GPT search Bar
 Multi-language feature in our app(Bunus)
-
+memoization use
+get suggestions movies
+environment use
 
 ================================================features==
 -Home page
