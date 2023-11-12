@@ -54,9 +54,9 @@ const Header = () => {
   }
   return (
     <div className="absolute w-screen px-6 py-2 bg-gradient-to-b from-black z-10 flex
-  justify-between ">
+  justify-between flex-col md:flex-row ">
      
-        <img className="w-44"
+        <img className="w-44 mx-auto md:mx-0"
       src={ LOGO_URL}
          alt="logo" />
       {user && (<div className="flex">

@@ -39,7 +39,12 @@ Multi-language feature in our app(Bunus)
 memoization use
 get suggestions movies
 environment use
-
+.evn file to .gitignore
+Open AI Api key
+Fetch  gpt movies suggestions TMDB
+gpt slice
+resuse Movie list component to make suggestion container
+Make Site response
 ================================================features==
 -Home page
 -header
