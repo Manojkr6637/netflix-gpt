@@ -1,4 +1,4 @@
-# netflix GPT
+# netflix GPT1
 
 https://netflixgpt-12a4e.web.app/
 -create react app
